@@ -119,7 +119,7 @@ export const Rectangle = styled.div`
   box-shadow: 4px 0px 8px 0px rgba(165, 171, 179, 0.16);
 
   @media (max-width: 1024px) {
-    animation: in-out 3s forwards;
+    animation: in-out 2s forwards;
   }
 
   @keyframes in-out {
@@ -142,4 +142,5 @@ export const Content = styled.div`
   max-width: 58%;
   height: 100%;
   margin: auto;
+  box-sizing: border-box;
 `

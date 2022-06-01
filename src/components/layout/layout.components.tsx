@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, CSSProperties } from 'react'
 import Image from 'next/image'
 import {
   Container,
@@ -23,10 +23,11 @@ import Avatar from '@mui/material/Avatar'
 import { colors } from '../../styles/global'
 
 interface LayoutProps {
-  children: ReactNode
+  children?: ReactNode
+  contentStyle?: CSSProperties
 }
 
-const Layout = ({ children }: LayoutProps) => {
+const Layout = ({ children, contentStyle }: LayoutProps) => {
   return (
     <Container>
       <Header>
@@ -56,7 +57,7 @@ const Layout = ({ children }: LayoutProps) => {
         <Rectangle />
 
         <Dashboard>
-          <Content>{children}</Content>
+          <Content style={contentStyle}>{children}</Content>
         </Dashboard>
       </Main>
     </Container>
