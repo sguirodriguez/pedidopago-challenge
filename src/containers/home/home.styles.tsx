@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 import { colors, textDefault } from '../../styles/global'
+import Tab from '@mui/material/Tab'
 
 export const Title = styled(textDefault)`
   font-weight: 600;
@@ -21,4 +22,8 @@ export const TabTitle = styled(textDefault)`
   line-eight: 1.4rem;
   font-weight: 600;
   text-transform: capitalize;
+`
+
+export const TabItem = styled(Tab)`
+  width: 196px;
 `

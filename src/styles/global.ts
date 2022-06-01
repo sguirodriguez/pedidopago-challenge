@@ -25,5 +25,7 @@ export const colors = {
   secondaryColor:'#034AFD',
   statusColor:'#B5F1DD',
   textColor:'#587169',
+  inputLabel:'#A3B8B0',
+  inputIcon:'#587169',
 }
 

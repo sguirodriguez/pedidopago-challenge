@@ -1,9 +1,8 @@
 import type { NextPage } from 'next'
-import { Title, Dashboard, TabTitle } from './home.styles'
+import { Title, Dashboard, TabTitle, TabItem } from './home.styles'
 import Layout from '../../components/layout/layout.components'
 import React, { useState } from 'react'
 import Tabs from '@mui/material/Tabs'
-import Tab from '@mui/material/Tab'
 import Box from '@mui/material/Box'
 import { colors } from '../../styles/global'
 import ListEmployes from '../../components/listEmployes/listEmployes.components'
@@ -52,15 +51,13 @@ const HomeScreen: NextPage = () => {
                 style: { background: colors.primaryColor },
               }}
             >
-              <Tab
+              <TabItem
                 label={translatorTabLabel(tabIndex, 'Colaboradores')}
                 {...a11yProps(0)}
-                style={{ width: 196 }}
               />
-              <Tab
+              <TabItem
                 label={translatorTabLabel(tabIndex == 0 ? 1 : 0, 'Cargos')}
                 {...a11yProps(1)}
-                style={{ width: 196 }}
               />
             </Tabs>
           </Box>

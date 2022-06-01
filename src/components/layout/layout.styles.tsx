@@ -119,16 +119,7 @@ export const Rectangle = styled.div`
   box-shadow: 4px 0px 8px 0px rgba(165, 171, 179, 0.16);
 
   @media (max-width: 1024px) {
-    animation: in-out 2s forwards;
-  }
-
-  @keyframes in-out {
-    from {
-      max-with: 256px;
-    }
-    to {
-      max-width: 0px;
-    }
+    display: none;
   }
 `
 
