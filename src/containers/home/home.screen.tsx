@@ -37,7 +37,6 @@ const HomeScreen: NextPage = () => {
         display: 'flex',
         flexDirection: 'column',
         gap: 24,
-        paddingBottom: 40,
       }}
     >
       <Title>Organização</Title>

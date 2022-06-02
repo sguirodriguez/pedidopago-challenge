@@ -46,8 +46,9 @@ const InputText = ({
             startAdornment: icon,
             style: inputStyle || {
               borderColor: colors.gray,
-              height: 52,
+              height: '4.2rem',
               fontSize: '1.6rem',
+              lineHeight: '2.4rem',
               fontFamily: 'Poppins',
             },
             notched: true,

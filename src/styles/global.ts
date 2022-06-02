@@ -27,5 +27,6 @@ export const colors = {
   textColor:'#587169',
   inputLabel:'#A3B8B0',
   inputIcon:'#587169',
+  tableBorderColor:'#CAD6D1'
 }
 

@@ -35,7 +35,6 @@ export const Left = styled.div`
   @media (max-width: 600px) {
     border: 0px;
     flex: 1;
-    margin-right: 50px;
     justify-content: center;
   }
 `
@@ -126,7 +125,14 @@ export const Rectangle = styled.div`
 export const Dashboard = styled.div`
   flex: 1;
   background-color: ${colors.background};
-  padding-top: 56px;
+
+  @media (max-width: 700px) {
+    height: 1000px;
+  }
+
+  @media (max-width: 576px) {
+    height: 1527px;
+  }
 `
 
 export const Content = styled.div`
@@ -134,4 +140,31 @@ export const Content = styled.div`
   height: 100%;
   margin: auto;
   box-sizing: border-box;
+  padding-top: 56px;
+  padding-bottom: 80px;
+
+  @media (max-width: 1910px) {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    max-width: 65%;
+    max-height: 700px;
+  }
+
+  @media (max-width: 1300px) {
+    max-width: 80%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  @media (max-width: 780px) {
+    max-width: 90%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+
+  @media (max-width: 576px) {
+    max-width: 90%;
+    padding-top: 40px;
+    padding-bottom: 125px;
+  }
 `

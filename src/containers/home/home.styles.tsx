@@ -14,7 +14,11 @@ export const Dashboard = styled.div`
   background-color: ${colors.white};
   border-radius: 8px;
   box-shadow: 5px 5px 10px 0px rgba(165, 171, 179, 0.16);
-  padding: 30px 24px 30px 24px;
+  padding: 40px 24px;
+
+  @media (max-width: 1910px) {
+    padding: 10px 24px 10px 24px;
+  }
 `
 
 export const TabTitle = styled(textDefault)`
