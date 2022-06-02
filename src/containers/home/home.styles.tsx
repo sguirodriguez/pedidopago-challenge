@@ -8,7 +8,7 @@ export const Title = styled(textDefault)`
   line-height: 32px;
 `
 
-export const Dashboard = styled.div`
+export const DashboardBox = styled.div`
   width: 100%;
   height: 100%;
   background-color: ${colors.white};
@@ -18,6 +18,11 @@ export const Dashboard = styled.div`
 
   @media (max-width: 1910px) {
     padding: 10px 24px 10px 24px;
+  }
+
+  @media (max-width: 576px) {
+    padding: 5px 14px 5px 14px;
+    height: 700px;
   }
 `
 

@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import { Title, Dashboard, TabTitle, TabItem } from './home.styles'
+import { Title, DashboardBox, TabTitle, TabItem } from './home.styles'
 import Layout from '../../components/layout/layout.components'
 import React, { useState } from 'react'
 import Tabs from '@mui/material/Tabs'
@@ -40,7 +40,7 @@ const HomeScreen: NextPage = () => {
       }}
     >
       <Title>Organização</Title>
-      <Dashboard>
+      <DashboardBox>
         <Box sx={{ width: '100%' }}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <Tabs
@@ -62,7 +62,7 @@ const HomeScreen: NextPage = () => {
           </Box>
         </Box>
         {tabIndex == 0 ? <ListEmployes /> : <ListResponsabilities />}
-      </Dashboard>
+      </DashboardBox>
     </Layout>
   )
 }

@@ -140,7 +140,7 @@ export const Content = styled.div`
   height: 100%;
   margin: auto;
   box-sizing: border-box;
-  padding-top: 56px;
+  padding-top: 50px;
   padding-bottom: 80px;
 
   @media (max-width: 1910px) {

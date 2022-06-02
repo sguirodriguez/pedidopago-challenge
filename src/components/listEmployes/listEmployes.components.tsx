@@ -1,6 +1,11 @@
 import React, { useState } from 'react'
 import Input from '../../components/input/input.components'
-import { IconInput, TitleTable } from './listEmployes.styles'
+import {
+  Container,
+  IconInput,
+  TitleTable,
+  MarginHorizontal,
+} from './listEmployes.styles'
 import DataTable from '../DataTable/dataTable.components'
 
 const ListEmployes = () => {
@@ -11,17 +16,18 @@ const ListEmployes = () => {
   }
 
   return (
-    <div style={{ paddingTop: 10 }}>
+    <Container>
       <Input
         labelText="Pesquisar Por"
         placeholderText="Pesquise por nome ou cpf"
         handleChange={handleChange}
         icon={<IconInput />}
       />
+      <MarginHorizontal />
       <TitleTable>Listagem de colaboradores</TitleTable>
-      <div style={{ paddingTop: 10 }}></div>
+      <MarginHorizontal />
       <DataTable />
-    </div>
+    </Container>
   )
 }
 export default ListEmployes
