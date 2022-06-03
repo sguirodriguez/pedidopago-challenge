@@ -30,5 +30,6 @@ export const colors = {
   inputIcon:'#587169',
   tableBorderColor:'#CAD6D1',
   iconTableColor:'#587169',
+  borderButtonAccordionColor:'#B5F1DD',
 }
 

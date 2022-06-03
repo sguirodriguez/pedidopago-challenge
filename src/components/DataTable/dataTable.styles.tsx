@@ -21,6 +21,17 @@ export const Container = styled.div`
   }
 `
 
+export const ContainerAccordion = styled.div`
+  width: 100%;
+  height: 400px;
+  display: none;
+  @media (max-width: 570px) {
+    display: block;
+    max-height: 1000px;
+    height: 100%;
+  }
+`
+
 export const ContainerPaper = styled(Paper)`
   width: 100%;
   overflow: hidden;
@@ -30,6 +41,10 @@ export const ContainerPaper = styled(Paper)`
   border-right-width: 0px;
   border-color: ${colors.tableBorderColor};
   border-radius: 8px 8px 0px 0px;
+
+  @media (max-width: 570px) {
+    display: none;
+  }
 `
 
 export const ContainerTable = styled(TableContainer)`

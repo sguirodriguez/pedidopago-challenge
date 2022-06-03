@@ -21,8 +21,10 @@ import {
   MoreVertIconTable,
   Status,
   StatusInactive,
+  ContainerAccordion,
 } from './dataTable.styles'
 import Avatar from '@mui/material/Avatar'
+import AccordionComponent from '../accordion/accordion.components'
 
 type Column = Array<{
   id: 'name' | 'department' | 'responsibility' | 'unity' | 'status' | 'action'
@@ -97,6 +99,10 @@ const DataTable = ({
 
   return (
     <Container>
+      <ContainerAccordion>
+        <AccordionComponent />
+      </ContainerAccordion>
+
       <ContainerPaper variant="outlined" className="paper-container">
         <ContainerTable>
           <Table>

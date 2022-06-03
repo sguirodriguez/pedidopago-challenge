@@ -24,7 +24,9 @@ export const DashboardBox = styled.div`
 
   @media (max-width: 576px) {
     padding: 5px 14px 5px 14px;
-    height: 700px;
+    overflow-x: visible;
+    overflow-y: visible;
+    height: 1300px;
   }
 `
 
