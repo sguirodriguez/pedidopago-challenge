@@ -22,9 +22,12 @@ import {
   Status,
   StatusInactive,
   ContainerAccordion,
+  ButtonShowMore,
+  TextShowMore,
 } from './dataTable.styles'
 import Avatar from '@mui/material/Avatar'
 import AccordionComponent from '../accordion/accordion.components'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
 type Column = Array<{
   id: 'name' | 'department' | 'responsibility' | 'unity' | 'status' | 'action'
@@ -100,7 +103,14 @@ const DataTable = ({
   return (
     <Container>
       <ContainerAccordion>
-        <AccordionComponent />
+        {rows?.map((row: any) => (
+          <AccordionComponent row={row} columns={columns} />
+        ))}
+
+        <ButtonShowMore variant="outlined">
+          <ExpandMoreIcon style={{ fontSize: 18 }} />
+          <TextShowMore>Carregar mais</TextShowMore>
+        </ButtonShowMore>
       </ContainerAccordion>
 
       <ContainerPaper variant="outlined" className="paper-container">

@@ -7,6 +7,7 @@ import TableContainer from '@mui/material/TableContainer'
 import Paper from '@mui/material/Paper'
 import TableCell from '@mui/material/TableCell'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
+import Button from '@mui/material/Button'
 
 export const Container = styled.div`
   .head-table {
@@ -25,12 +26,34 @@ export const ContainerAccordion = styled.div`
   width: 100%;
   height: 400px;
   display: none;
+
   @media (max-width: 570px) {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
     height: 100%;
     max-height: 1000px;
     overflow: auto;
   }
+`
+
+export const ButtonShowMore = styled(Button)`
+  margin-top: 10px;
+  width: 100%;
+  height: 52px;
+  border-color: ${colors.borderButtonAccordionColor};
+  color: ${colors.primaryColor};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-width: 2px;
+  gap: 10px;
+`
+export const TextShowMore = styled(textDefault)`
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  font-weight: 600;
+  text-transform: capitalize;
 `
 
 export const ContainerPaper = styled(Paper)`

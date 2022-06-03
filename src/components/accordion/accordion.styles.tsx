@@ -13,6 +13,7 @@ export const Container = styled(Accordion)`
 export const Summary = styled.div`
   display: flex;
   flex-direction: column;
+  box-shadow: none;
   gap: 10px;
 `
 export const AvatarAndName = styled.div`
