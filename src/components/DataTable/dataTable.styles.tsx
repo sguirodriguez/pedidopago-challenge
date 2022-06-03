@@ -27,8 +27,9 @@ export const ContainerAccordion = styled.div`
   display: none;
   @media (max-width: 570px) {
     display: block;
-    max-height: 1000px;
     height: 100%;
+    max-height: 1000px;
+    overflow: auto;
   }
 `
 

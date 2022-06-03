@@ -2,6 +2,13 @@ import styled from '@emotion/styled'
 import { textDefault } from '../../styles/global'
 import { colors } from '../../styles/global'
 import AccordionDetails from '@mui/material/AccordionDetails'
+import Button from '@mui/material/Button'
+import Accordion from '@mui/material/Accordion'
+
+export const Container = styled(Accordion)`
+  border: 1px solid ${colors.gray};
+  box-shadow: none;
+`
 
 export const Summary = styled.div`
   display: flex;
@@ -44,4 +51,22 @@ export const DetailsRight = styled.div`
 `
 export const Text = styled(Title)`
   font-weight: 400;
+`
+
+export const ButtonAccordion = styled(Button)`
+  width: 100%;
+  height: 52px;
+  border-color: ${colors.borderButtonAccordionColor};
+  color: ${colors.primaryColor};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-width: 2px;
+  gap: 10px;
+`
+export const TextAccordion = styled(textDefault)`
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  font-weight: 600;
+  text-transform: capitalize;
 `

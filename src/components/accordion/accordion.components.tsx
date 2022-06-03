@@ -4,19 +4,21 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import Avatar from '@mui/material/Avatar'
 import { Summary } from './accordion.styles'
 import {
+  Container,
   AvatarAndName,
   Title,
   DetailsAccordion,
   DetailsLeft,
   DetailsRight,
   Text,
+  ButtonAccordion,
+  TextAccordion,
 } from './accordion.styles'
-import Button from '@mui/material/Button'
 import InsertDriveFileOutlinedIcon from '@mui/icons-material/InsertDriveFileOutlined'
 
 const AccordionComponent = () => {
   return (
-    <Accordion>
+    <Container>
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
         aria-controls="panel1a-content"
@@ -61,23 +63,12 @@ const AccordionComponent = () => {
         <Text>Diretor</Text>
       </DetailsAccordion>
       <DetailsAccordion>
-        <Button
-          style={{
-            width: '100%',
-            height: 52,
-            borderColor: '#B5F1DD',
-            color: '#B5F1DD',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-          variant="outlined"
-        >
+        <ButtonAccordion variant="outlined">
           <InsertDriveFileOutlinedIcon style={{ fontSize: 18 }} />
-          <span style={{ color: 'black', fontSize: 10 }}>Ações</span>
-        </Button>
+          <TextAccordion>Ações</TextAccordion>
+        </ButtonAccordion>
       </DetailsAccordion>
-    </Accordion>
+    </Container>
   )
 }
 

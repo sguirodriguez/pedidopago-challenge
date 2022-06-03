@@ -127,11 +127,14 @@ export const Dashboard = styled.div`
   background-color: ${colors.background};
 
   @media (max-width: 700px) {
-    height: 1000px;
+    max-height: 1000px;
+    overflow: auto;
   }
 
   @media (max-width: 576px) {
-    height: 1527px;
+    max-height: 1527px;
+    padding-bottom: 100px;
+    overflow: auto;
   }
 `
 
