@@ -15,6 +15,8 @@ export const DashboardBox = styled.div`
   border-radius: 8px;
   box-shadow: 5px 5px 10px 0px rgba(165, 171, 179, 0.16);
   padding: 40px 24px;
+  overflow-x: hidden;
+  overflow-y: auto;
 
   @media (max-width: 1910px) {
     padding: 10px 24px 10px 24px;

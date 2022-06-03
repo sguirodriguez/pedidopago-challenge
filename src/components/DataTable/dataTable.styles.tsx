@@ -5,6 +5,8 @@ import Select from '@mui/material/Select'
 import { colors } from '../../styles/global'
 import TableContainer from '@mui/material/TableContainer'
 import Paper from '@mui/material/Paper'
+import TableCell from '@mui/material/TableCell'
+import MoreVertIcon from '@mui/icons-material/MoreVert'
 
 export const Container = styled.div`
   .head-table {
@@ -19,14 +21,6 @@ export const Container = styled.div`
   }
 `
 
-export const ContainerTable = styled(TableContainer)`
-  max-height: 520px;
-
-  @media (max-width: 1910px) {
-    max-height: 380px;
-  }
-`
-
 export const ContainerPaper = styled(Paper)`
   width: 100%;
   overflow: hidden;
@@ -36,6 +30,34 @@ export const ContainerPaper = styled(Paper)`
   border-right-width: 0px;
   border-color: ${colors.tableBorderColor};
   border-radius: 8px 8px 0px 0px;
+`
+
+export const ContainerTable = styled(TableContainer)`
+  max-height: 530px;
+
+  @media (max-width: 1910px) {
+    max-height: 330px;
+  }
+
+  @media (max-width: 1200px) {
+    max-height: 310px;
+  }
+`
+
+export const HeaderTable = styled(TableCell)`
+  border-width: 0px;
+  height: 49px;
+`
+
+export const Row = styled(TableCell)`
+  height: 65px;
+`
+
+export const AvatarAndText = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
 `
 
 export const TableTitle = styled(textDefault)`
@@ -76,4 +98,27 @@ export const SelectRowsPerPage = styled(Select)`
   border-color: ${colors.tableBorderColor};
   border-radius: 8px;
   border-width: 2px;
+`
+export const MoreVertIconTable = styled(MoreVertIcon)`
+  width: 22px;
+  height: 22px;
+  color: ${colors.iconTableColor};
+`
+
+export const Status = styled.div`
+  width: 72px;
+  height: 24px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${colors.statusColor};
+  font-size: 1.4rem;
+  line-height: 1.624rem;
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif;
+`
+
+export const StatusInactive = styled(Status)`
+  background-color: ${colors.statusColorInactive};
 `

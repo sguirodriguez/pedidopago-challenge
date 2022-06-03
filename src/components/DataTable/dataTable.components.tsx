@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
-import TableCell from '@mui/material/TableCell'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Pagination from '@mui/material/Pagination'
@@ -16,17 +15,46 @@ import {
   ContainerPaper,
   TableTitle,
   TableDescription,
+  HeaderTable,
+  Row,
+  AvatarAndText,
+  MoreVertIconTable,
+  Status,
+  StatusInactive,
 } from './dataTable.styles'
+import Avatar from '@mui/material/Avatar'
 
-interface Column {
-  id: 'name' | 'calories' | 'fat' | 'carbs' | 'protein'
+type Column = Array<{
+  id: 'name' | 'department' | 'responsibility' | 'unity' | 'status' | 'action'
   label: string
-  minWidth?: number
-  align?: 'right' | 'left'
-  format?: (value: number) => string
+  minWidth: number
+  align: 'right' | 'left' | 'center'
+}>
+
+interface Rows {
+  name?: Array<[string, string]> | string
+  department?: number | string
+  responsibility?: number | string
+  unity?: number | string
+  status?: number | string
+  action?: any
 }
 
-const DataTable = () => {
+interface DataTableProps {
+  columns: Column
+  rows: Rows[]
+  avatar?: true | false
+  rowsPerPageVisible?: true | false
+  paginationVisible?: true | false
+}
+
+const DataTable = ({
+  columns,
+  rows,
+  avatar = false,
+  rowsPerPageVisible = true,
+  paginationVisible = true,
+}: DataTableProps) => {
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(10)
 
@@ -38,39 +66,34 @@ const DataTable = () => {
     setPage(newPage - 1)
   }
 
-  const columns: readonly Column[] = [
-    { id: 'name', label: 'Name', minWidth: 170, align: 'left' },
-    { id: 'calories', label: 'ISO Code', minWidth: 80, align: 'left' },
-    { id: 'fat', label: 'Population', minWidth: 80, align: 'left' },
-    { id: 'carbs', label: 'Size', minWidth: 80, align: 'left' },
-    { id: 'protein', label: 'Best', minWidth: 80, align: 'left' },
-  ]
-
-  function createData(
-    name: string,
-    calories: number,
-    fat: number,
-    carbs: number,
-    protein: number
-  ) {
-    return { name, calories, fat, carbs, protein }
+  const verifyAvatarIsVisible = (value: any) => {
+    if (!avatar) {
+      return value
+    }
+    return (
+      <AvatarAndText>
+        {Array.isArray(value) ? (
+          <Avatar src={value[1]} style={{ width: 32, height: 32 }} />
+        ) : (
+          <Avatar src="/broken-image.jpg" style={{ width: 32, height: 32 }} />
+        )}
+        <TableTitle>{Array.isArray(value) ? value[0] : value}</TableTitle>
+      </AvatarAndText>
+    )
   }
 
-  const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  ]
+  const translatorStatus = (value: string) => {
+    const translator = {
+      inactive: <StatusInactive>Inativo</StatusInactive>,
+      active: <Status>Ativo</Status>,
+    }
+
+    if (!value) {
+      return <StatusInactive>Inativo</StatusInactive>
+    }
+
+    return translator[value as keyof typeof translator]
+  }
 
   return (
     <Container>
@@ -79,37 +102,53 @@ const DataTable = () => {
           <Table>
             <TableHead className="head-table">
               <TableRow>
-                {columns.map(column => (
-                  <TableCell
+                {columns?.map(column => (
+                  <HeaderTable
                     key={column.id}
                     align={column.align}
                     style={{
                       minWidth: column.minWidth,
-                      borderWidth: 0,
                     }}
                   >
                     <TableTitle>{column.label}</TableTitle>
-                  </TableCell>
+                  </HeaderTable>
                 ))}
               </TableRow>
             </TableHead>
 
             <TableBody>
               {rows
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
+                ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                ?.map((row, index) => {
                   return (
                     <TableRow hover tabIndex={-1} key={index}>
-                      {columns.map(column => {
+                      {columns?.map(column => {
                         const value = row[column.id]
+                        if (column.id == 'status') {
+                          return (
+                            <Row key={column.id} align={column.align}>
+                              {translatorStatus(value)}
+                            </Row>
+                          )
+                        }
+
+                        if (column.id == 'action') {
+                          return (
+                            <Row key={column.id} align={column.align}>
+                              <a onClick={() => console.log(value)}>
+                                <MoreVertIconTable />
+                              </a>
+                            </Row>
+                          )
+                        }
                         return (
-                          <TableCell key={column.id} align={column.align}>
+                          <Row key={column.id} align={column.align}>
                             {column.id == 'name' ? (
-                              <TableTitle>{value}</TableTitle>
+                              verifyAvatarIsVisible(value)
                             ) : (
                               <TableDescription>{value}</TableDescription>
                             )}
-                          </TableCell>
+                          </Row>
                         )
                       })}
                     </TableRow>
@@ -121,25 +160,32 @@ const DataTable = () => {
 
         <FooterPagination>
           <FooterLeft>
-            <FooterTitle>
-              Mostrando {rowsPerPage} de {rows.length} registros
-            </FooterTitle>
-            <SelectRowsPerPage
-              defaultValue={10}
-              value={rowsPerPage}
-              onChange={handleChangeRows}
-            >
-              <MenuItem value={10}>10</MenuItem>
-              <MenuItem value={20}>20</MenuItem>
-              <MenuItem value={50}>50</MenuItem>
-            </SelectRowsPerPage>
+            {rowsPerPageVisible && (
+              <>
+                <FooterTitle>
+                  Mostrando {rowsPerPage} de {rows?.length} registros
+                </FooterTitle>
+                <SelectRowsPerPage
+                  defaultValue={10}
+                  value={rowsPerPage}
+                  onChange={handleChangeRows}
+                >
+                  <MenuItem value={10}>10</MenuItem>
+                  <MenuItem value={20}>20</MenuItem>
+                  <MenuItem value={50}>50</MenuItem>
+                </SelectRowsPerPage>
+              </>
+            )}
           </FooterLeft>
-          <Pagination
-            count={Math.ceil(rows.length / rowsPerPage)}
-            onChange={handleChangePage}
-            variant="outlined"
-            shape="rounded"
-          />
+
+          {paginationVisible && (
+            <Pagination
+              count={rows ? Math.ceil(rows?.length / rowsPerPage) : 0}
+              onChange={handleChangePage}
+              variant="outlined"
+              shape="rounded"
+            />
+          )}
         </FooterPagination>
       </ContainerPaper>
     </Container>

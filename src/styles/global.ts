@@ -24,9 +24,11 @@ export const colors = {
   primaryColor:'#22E0A1',
   secondaryColor:'#034AFD',
   statusColor:'#B5F1DD',
+  statusColorInactive:'#EAEFED',
   textColor:'#587169',
   inputLabel:'#A3B8B0',
   inputIcon:'#587169',
   tableBorderColor:'#CAD6D1',
+  iconTableColor:'#587169',
 }
 

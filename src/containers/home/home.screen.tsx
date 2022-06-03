@@ -1,4 +1,3 @@
-import type { NextPage } from 'next'
 import { Title, DashboardBox, TabTitle, TabItem } from './home.styles'
 import Layout from '../../components/layout/layout.components'
 import React, { useState } from 'react'
@@ -8,7 +7,12 @@ import { colors } from '../../styles/global'
 import ListEmployes from '../../components/listEmployes/listEmployes.components'
 import ListResponsabilities from '../../components/listResponsibilities/listResponsibilities.components'
 
-const HomeScreen: NextPage = () => {
+type HomeProps = {
+  handlers?: any
+}
+
+const HomeScreen: React.FC<HomeProps> = ({ handlers }) => {
+  const { totalEmployes } = handlers
   const [tabIndex, setTabIndex] = useState(0)
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -61,7 +65,11 @@ const HomeScreen: NextPage = () => {
             </Tabs>
           </Box>
         </Box>
-        {tabIndex == 0 ? <ListEmployes /> : <ListResponsabilities />}
+        {tabIndex == 0 ? (
+          <ListEmployes totalEmployes={totalEmployes} />
+        ) : (
+          <ListResponsabilities />
+        )}
       </DashboardBox>
     </Layout>
   )
