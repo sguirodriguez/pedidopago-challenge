@@ -6,7 +6,6 @@ import { colors } from '../../styles/global'
 import TableContainer from '@mui/material/TableContainer'
 import Paper from '@mui/material/Paper'
 import TableCell from '@mui/material/TableCell'
-import MoreVertIcon from '@mui/icons-material/MoreVert'
 import Button from '@mui/material/Button'
 
 export const Container = styled.div`
@@ -137,11 +136,6 @@ export const SelectRowsPerPage = styled(Select)`
   border-color: ${colors.tableBorderColor};
   border-radius: 8px;
   border-width: 2px;
-`
-export const MoreVertIconTable = styled(MoreVertIcon)`
-  width: 22px;
-  height: 22px;
-  color: ${colors.iconTableColor};
 `
 
 export const Status = styled.div`

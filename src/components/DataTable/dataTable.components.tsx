@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableHead from '@mui/material/TableHead'
@@ -18,7 +18,6 @@ import {
   HeaderTable,
   Row,
   AvatarAndText,
-  MoreVertIconTable,
   Status,
   StatusInactive,
   ContainerAccordion,
@@ -30,30 +29,8 @@ import AccordionComponent from '../accordion/accordion.components'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import ExpandLessIcon from '@mui/icons-material/ExpandLess'
 import { colors } from '../../styles/global'
-
-type Column = Array<{
-  id: 'name' | 'department' | 'responsibility' | 'unity' | 'status' | 'action'
-  label: string
-  minWidth: number
-  align: 'right' | 'left' | 'center'
-}>
-
-interface Rows {
-  name?: Array<[string, string]> | string
-  department?: number | string
-  responsibility?: number | string
-  unity?: number | string
-  status?: number | string
-  action?: any
-}
-
-interface DataTableProps {
-  columns: Column
-  rows: Rows[]
-  avatar?: true | false
-  rowsPerPageVisible?: true | false
-  paginationVisible?: true | false
-}
+import { DataTableProps } from './types'
+import Popover from '../popover/popover.components'
 
 const DataTable = ({
   columns,
@@ -61,12 +38,14 @@ const DataTable = ({
   avatar = false,
   rowsPerPageVisible = true,
   paginationVisible = true,
+  listMode,
 }: DataTableProps) => {
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(10)
   const [count, setCount] = useState(5)
 
   const handleChangeRows = (event: any) => {
+    setPage(0)
     setRowsPerPage(event.target.value)
   }
 
@@ -76,7 +55,7 @@ const DataTable = ({
 
   const verifyAvatarIsVisible = (value: any) => {
     if (!avatar) {
-      return value
+      return <TableTitle>{value}</TableTitle>
     }
     return (
       <AvatarAndText>
@@ -107,7 +86,7 @@ const DataTable = ({
     <Container>
       <ContainerAccordion>
         {rows?.slice(0, count).map((row: any) => (
-          <AccordionComponent row={row} columns={columns} />
+          <AccordionComponent row={row} columns={columns} listMode={listMode} />
         ))}
 
         {count > rows?.length ? (
@@ -157,7 +136,10 @@ const DataTable = ({
                   return (
                     <TableRow hover tabIndex={-1} key={index}>
                       {columns?.map(column => {
-                        const value = row[column.id]
+                        const value = row[column?.id]
+                        if (!column.id) {
+                          return
+                        }
                         if (column.id == 'status') {
                           return (
                             <Row key={column.id} align={column.align}>
@@ -169,9 +151,11 @@ const DataTable = ({
                         if (column.id == 'action') {
                           return (
                             <Row key={column.id} align={column.align}>
-                              <a onClick={() => console.log(value)}>
-                                <MoreVertIconTable />
-                              </a>
+                              <Popover
+                                index={index}
+                                details={value}
+                                listMode={listMode}
+                              />
                             </Row>
                           )
                         }

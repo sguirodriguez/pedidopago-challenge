@@ -29,7 +29,7 @@ type HomeProps = {
     }>
     totalResponsabilities: Array<{
       agents_quantity: number
-      department: string
+      departament: string
       name: string
     }>
   }
@@ -104,7 +104,7 @@ const HomeScreen: React.FC<HomeProps> = ({ handlers }) => {
         {tabIndex == 0 ? (
           <ListEmployes totalEmployes={totalEmployes} />
         ) : (
-          <ListResponsabilities totalEmployes={totalEmployes} />
+          <ListResponsabilities totalResponsabilities={totalResponsabilities} />
         )}
       </DashboardBox>
     </Layout>

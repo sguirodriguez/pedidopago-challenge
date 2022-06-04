@@ -20,13 +20,14 @@ type ResponseTotalsEmployes = {
 type ResponseTotalsResponsabilities = {
   roles?:Array<{
     agents_quantity:number
-    department:string
+    departament:string
     name:string
   }> 
 }
 
 export const getTotalsEmployes = async (): Promise<ResponseTotalsEmployes> => {
   const { data, status } = await axios.get(`${URL_TOTALS_AGENTS}`)
+
   if (status !== 200) {
     return { items:[] }
   }

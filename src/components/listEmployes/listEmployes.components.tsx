@@ -56,7 +56,7 @@ const ListEmployes = ({ totalEmployes }: ListEmployesProps) => {
     { id: 'responsibility', label: 'Cargo', minWidth: 80, align: 'left' },
     { id: 'unity', label: 'Unidade', minWidth: 80, align: 'left' },
     { id: 'status', label: 'Status', minWidth: 80, align: 'center' },
-    { id: 'action', label: '', minWidth: 20, align: 'left' },
+    { id: 'action', label: '', minWidth: 50, align: 'left' },
   ]
 
   function createData(
@@ -65,7 +65,7 @@ const ListEmployes = ({ totalEmployes }: ListEmployesProps) => {
     responsibility: number | string,
     unity: number | string,
     status: number | string,
-    action: number | string
+    action: any
   ) {
     return { name, department, responsibility, unity, status, action }
   }
@@ -97,7 +97,7 @@ const ListEmployes = ({ totalEmployes }: ListEmployesProps) => {
       <TitleTable>Listagem de colaboradores</TitleTable>
       <MarginHorizontal />
 
-      <DataTable rows={rows} columns={columns} avatar />
+      <DataTable rows={rows} columns={columns} listMode="LISTEMPLOYES" avatar />
     </Container>
   )
 }

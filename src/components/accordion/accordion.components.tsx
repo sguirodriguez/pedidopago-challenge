@@ -19,7 +19,14 @@ import {
 import InsertDriveFileOutlinedIcon from '@mui/icons-material/InsertDriveFileOutlined'
 
 type column = {
-  id: 'name' | 'department' | 'responsibility' | 'unity' | 'status' | 'action'
+  id:
+    | 'name'
+    | 'department'
+    | 'responsibility'
+    | 'unity'
+    | 'status'
+    | 'action'
+    | 'agents_quantity'
   label: string
   minWidth: number
   align: 'right' | 'left' | 'center'
@@ -31,12 +38,18 @@ interface AccordionProps {
     responsibility: number | string
     unity: number | string
     status: number | string
+    agents_quantity: number
     action: any
   }
-  columns?: any
+  columns?: column[]
+  listMode?: 'LISTEMPLOYES' | 'LISTRESPONSIBILITIES' | 'DEFAULT'
 }
 
-const AccordionComponent = ({ row, columns }: AccordionProps) => {
+const AccordionComponent = ({
+  row,
+  columns,
+  listMode = 'LISTEMPLOYES',
+}: AccordionProps) => {
   const translatorStatus = (value: string) => {
     const translator = {
       inactive: <StatusInactive>Inativo</StatusInactive>,
@@ -50,7 +63,7 @@ const AccordionComponent = ({ row, columns }: AccordionProps) => {
     return translator[value as keyof typeof translator]
   }
 
-  const translatorColumnsRender = (nameColumn: string) => {
+  const translatorColumnsForEmployes = (nameColumn: string) => {
     const translator = {
       name: (
         <AccordionSummary
@@ -104,16 +117,52 @@ const AccordionComponent = ({ row, columns }: AccordionProps) => {
     }
     return translator[nameColumn as keyof typeof translator]
   }
+
+  const translatorColumnsForResponsabilities = (nameColumn: string) => {
+    const translator = {
+      name: (
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <DetailsAccordion style={{ width: '100%' }}>
+            <DetailsLeft style={{ alignItems: 'flex-start' }}>
+              <Title>Cargo</Title>
+              <Text>{row.name}</Text>
+            </DetailsLeft>
+
+            <DetailsRight>
+              <Title>Departamento</Title>
+              <Text>{row.department}</Text>
+            </DetailsRight>
+          </DetailsAccordion>
+        </AccordionSummary>
+      ),
+
+      agents_quantity: (
+        <DetailsAccordion style={{ flexDirection: 'column', paddingLeft: 30 }}>
+          <Title>Colaboradores</Title>
+          <Text>{row.agents_quantity}</Text>
+        </DetailsAccordion>
+      ),
+    }
+    return translator[nameColumn as keyof typeof translator]
+  }
   return (
     <Container>
       {columns?.map((column: any) => {
-        return translatorColumnsRender(column.id)
+        return listMode == 'LISTEMPLOYES'
+          ? translatorColumnsForEmployes(column.id)
+          : translatorColumnsForResponsabilities(column.id)
       })}
 
       <DetailsAccordion>
         <ButtonAccordion
           variant="outlined"
-          onClick={() => console.log(row.action)}
+          onClick={() => {
+            console.log(row.action ? row.action : 'open modal')
+          }}
         >
           <InsertDriveFileOutlinedIcon style={{ fontSize: 18 }} />
           <TextAccordion>Ações</TextAccordion>

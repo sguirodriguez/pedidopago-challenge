@@ -17,7 +17,7 @@ type TotalsEmployes = Array<{
 
 type TotalsResponsabilities = Array<{
   agents_quantity: number
-  department: string
+  departament: string
   name: string
 }>
 

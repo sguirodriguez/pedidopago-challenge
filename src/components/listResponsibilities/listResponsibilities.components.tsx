@@ -9,38 +9,37 @@ import {
 import DataTable from '../dataTable/dataTable.components'
 
 type Column = Array<{
-  id: 'name' | 'department' | 'responsibility' | 'unity' | 'status' | 'action'
+  id:
+    | 'name'
+    | 'department'
+    | 'responsibility'
+    | 'unity'
+    | 'status'
+    | 'action'
+    | 'agents_quantity'
   label: string
   minWidth: number
   align: 'right' | 'left' | 'center'
 }>
 
 type FilteredByName = Array<{
-  agent_id: number
-  branch: string
-  department: string
-  image: string
+  agents_quantity: number
+  departament: string
   name: string
-  role: string
-  status: string
 }>
 
 type ListEmployesProps = {
-  totalEmployes: Array<{
-    agent_id: number
-    branch: string
-    department: string
-    image: string
+  totalResponsabilities: Array<{
+    agents_quantity: number
+    departament: string
     name: string
-    role: string
-    status: string
   }>
 }
-const ListResponsabilities = ({ totalEmployes }: ListEmployesProps) => {
+const ListResponsabilities = ({ totalResponsabilities }: ListEmployesProps) => {
   const [searchNameOrCpf, setSearchNameOrCpf] = useState('')
   const [filteredByName, setFilteredByName] = useState<FilteredByName>()
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const filterName = totalEmployes?.filter(item =>
+    const filterName = totalResponsabilities?.filter(item =>
       String(item.name)
         ?.toLowerCase()
         ?.includes(String(event.target.value).toLowerCase())
@@ -51,35 +50,34 @@ const ListResponsabilities = ({ totalEmployes }: ListEmployesProps) => {
   }
 
   const columns: Column = [
-    { id: 'name', label: 'Nome', minWidth: 170, align: 'left' },
+    { id: 'name', label: 'Cargo', minWidth: 140, align: 'left' },
     { id: 'department', label: 'Departamento', minWidth: 80, align: 'left' },
-    { id: 'responsibility', label: 'Cargo', minWidth: 80, align: 'left' },
-    { id: 'unity', label: 'Unidade', minWidth: 80, align: 'left' },
-    { id: 'status', label: 'Status', minWidth: 80, align: 'center' },
-    { id: 'action', label: '', minWidth: 20, align: 'left' },
+    {
+      id: 'agents_quantity',
+      label: 'Colaboradores',
+      minWidth: 80,
+      align: 'left',
+    },
+    { id: 'action', label: '', minWidth: 20, align: 'right' },
   ]
 
   function createData(
-    name: any,
-    department: number | string,
-    responsibility: number | string,
-    unity: number | string,
-    status: number | string,
-    action: number | string
+    name: string,
+    department: string,
+    agents_quantity: number,
+    action: string
   ) {
-    return { name, department, responsibility, unity, status, action }
+    return { name, department, agents_quantity, action }
   }
 
-  const arrayForRows = filteredByName ? filteredByName : totalEmployes
+  const arrayForRows = filteredByName ? filteredByName : totalResponsabilities
 
   const rows = arrayForRows?.map(item => {
     return createData(
-      [item.name, item.image],
-      item.department,
-      item.role,
-      'Quartel General',
-      item.status,
-      item.agent_id
+      item.name,
+      item.departament,
+      item.agents_quantity,
+      item.name
     )
   })
 
@@ -97,7 +95,11 @@ const ListResponsabilities = ({ totalEmployes }: ListEmployesProps) => {
       <TitleTable>Listagem de cargos</TitleTable>
       <MarginHorizontal />
 
-      <DataTable rows={rows} columns={columns} />
+      <DataTable
+        rows={rows}
+        columns={columns}
+        listMode="LISTRESPONSIBILITIES"
+      />
     </Container>
   )
 }
