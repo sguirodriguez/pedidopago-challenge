@@ -25,8 +25,8 @@ type FilteredByName = Array<{
   status: string
 }>
 
-type TotalEmployes = {
-  items: Array<{
+type ListEmployesProps = {
+  totalEmployes: Array<{
     agent_id: number
     branch: string
     department: string
@@ -36,15 +36,11 @@ type TotalEmployes = {
     status: string
   }>
 }
-
-type ListEmployesProps = {
-  totalEmployes: TotalEmployes
-}
 const ListEmployes = ({ totalEmployes }: ListEmployesProps) => {
   const [searchNameOrCpf, setSearchNameOrCpf] = useState('')
   const [filteredByName, setFilteredByName] = useState<FilteredByName>()
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const filterName = totalEmployes?.items?.filter(item =>
+    const filterName = totalEmployes?.filter(item =>
       String(item.name)
         ?.toLowerCase()
         ?.includes(String(event.target.value).toLowerCase())
@@ -74,7 +70,7 @@ const ListEmployes = ({ totalEmployes }: ListEmployesProps) => {
     return { name, department, responsibility, unity, status, action }
   }
 
-  const arrayForRows = filteredByName ? filteredByName : totalEmployes.items
+  const arrayForRows = filteredByName ? filteredByName : totalEmployes
 
   const rows = arrayForRows?.map(item => {
     return createData(

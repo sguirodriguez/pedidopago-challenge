@@ -5,8 +5,8 @@ const URL_DETAILS_AGENT = 'https://pp-api-desafio.herokuapp.com/agent/'
 const URL_TOTALS_RESPONSABILITIES = 'https://pp-api-desafio.herokuapp.com/roles'
 const URL_DETAILS_RESPONSABILITY = 'https://pp-api-desafio.herokuapp.com/role/'
 
-type Response = {
-  items: {
+type ResponseTotalsEmployes = {
+  items?: Array<{
     agent_id: number
     branch: string
     department: string
@@ -14,18 +14,26 @@ type Response = {
     name: string
     role: string
     status: string
-  }
+  }> 
 }
 
-export const getTotalsEmployes = async (): Promise<Response | {}> => {
+type ResponseTotalsResponsabilities = {
+  roles?:Array<{
+    agents_quantity:number
+    department:string
+    name:string
+  }> 
+}
+
+export const getTotalsEmployes = async (): Promise<ResponseTotalsEmployes> => {
   const { data, status } = await axios.get(`${URL_TOTALS_AGENTS}`)
   if (status !== 200) {
-    return {}
+    return { items:[] }
   }
   return data
 }
 
-export const getDetailsEmploye = async (id: number) => {
+export const getDetailsEmploye = async (id: number)=> {
   const { data, status } = await axios.get(`${URL_DETAILS_AGENT}${id}`)
   if (status !== 200) {
     return
@@ -33,10 +41,11 @@ export const getDetailsEmploye = async (id: number) => {
   return data
 }
 
-export const getTotalsResponsabilities = async () => {
+export const getTotalsResponsabilities = async ():Promise<ResponseTotalsResponsabilities> => {
   const { data, status } = await axios.get(`${URL_TOTALS_RESPONSABILITIES}`)
+
   if (status !== 200) {
-    return
+    return { roles:[] }
   }
   return data
 }

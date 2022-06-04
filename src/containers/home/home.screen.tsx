@@ -15,14 +15,28 @@ import { colors } from '../../styles/global'
 import ListEmployes from '../../components/listEmployes/listEmployes.components'
 import ListResponsabilities from '../../components/listResponsibilities/listResponsibilities.components'
 import MenuItem from '@mui/material/MenuItem'
-import Select, { SelectChangeEvent } from '@mui/material/Select'
 
 type HomeProps = {
-  handlers?: any
+  handlers: {
+    totalEmployes: Array<{
+      agent_id: number
+      branch: string
+      department: string
+      image: string
+      name: string
+      role: string
+      status: string
+    }>
+    totalResponsabilities: Array<{
+      agents_quantity: number
+      department: string
+      name: string
+    }>
+  }
 }
 
 const HomeScreen: React.FC<HomeProps> = ({ handlers }) => {
-  const { totalEmployes } = handlers
+  const { totalEmployes, totalResponsabilities } = handlers
   const [tabIndex, setTabIndex] = useState(0)
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -90,7 +104,7 @@ const HomeScreen: React.FC<HomeProps> = ({ handlers }) => {
         {tabIndex == 0 ? (
           <ListEmployes totalEmployes={totalEmployes} />
         ) : (
-          <ListResponsabilities />
+          <ListResponsabilities totalEmployes={totalEmployes} />
         )}
       </DashboardBox>
     </Layout>
