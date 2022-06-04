@@ -19,7 +19,6 @@ type Response = {
 
 export const getTotalsEmployes = async (): Promise<Response | {}> => {
   const { data, status } = await axios.get(`${URL_TOTALS_AGENTS}`)
-
   if (status !== 200) {
     return {}
   }

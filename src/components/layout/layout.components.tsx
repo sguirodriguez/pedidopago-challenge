@@ -56,8 +56,10 @@ const Layout = ({ children, contentStyle }: LayoutProps) => {
       <Main>
         <Rectangle />
 
-        <Dashboard>
-          <Content style={contentStyle}>{children}</Content>
+        <Dashboard className="dashboard-container">
+          <Content className="dashboard-content" style={contentStyle}>
+            {children}
+          </Content>
         </Dashboard>
       </Main>
     </Container>

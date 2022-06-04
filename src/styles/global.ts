@@ -20,7 +20,7 @@ export const colors = {
   white:'#FFFFFF',
   black: '#34423D',
   gray:'#EAEFED',
-  background:'#E5E5E5',
+  background:'#F9FAF9',
   primaryColor:'#22E0A1',
   secondaryColor:'#034AFD',
   statusColor:'#B5F1DD',

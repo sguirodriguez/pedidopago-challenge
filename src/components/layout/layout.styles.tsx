@@ -133,8 +133,6 @@ export const Dashboard = styled.div`
 
   @media (max-width: 576px) {
     max-height: 1527px;
-    padding-bottom: 100px;
-    overflow: auto;
   }
 `
 
@@ -168,6 +166,6 @@ export const Content = styled.div`
   @media (max-width: 576px) {
     max-width: 98%;
     padding-top: 40px;
-    padding-bottom: 125px;
+    padding-bottom: 50px;
   }
 `

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Input from '../../components/input/input.components'
 import {
   Container,
@@ -13,6 +13,16 @@ type Column = Array<{
   label: string
   minWidth: number
   align: 'right' | 'left' | 'center'
+}>
+
+type FilteredByName = Array<{
+  agent_id: number
+  branch: string
+  department: string
+  image: string
+  name: string
+  role: string
+  status: string
 }>
 
 type TotalEmployes = {
@@ -32,7 +42,15 @@ type ListEmployesProps = {
 }
 const ListEmployes = ({ totalEmployes }: ListEmployesProps) => {
   const [searchNameOrCpf, setSearchNameOrCpf] = useState('')
+  const [filteredByName, setFilteredByName] = useState<FilteredByName>()
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const filterName = totalEmployes?.items?.filter(item =>
+      String(item.name)
+        ?.toLowerCase()
+        ?.includes(String(event.target.value).toLowerCase())
+    )
+
+    setFilteredByName(filterName)
     setSearchNameOrCpf(event.target.value)
   }
 
@@ -56,7 +74,9 @@ const ListEmployes = ({ totalEmployes }: ListEmployesProps) => {
     return { name, department, responsibility, unity, status, action }
   }
 
-  const rows = totalEmployes?.items?.map(item => {
+  const arrayForRows = filteredByName ? filteredByName : totalEmployes.items
+
+  const rows = arrayForRows?.map(item => {
     return createData(
       [item.name, item.image],
       item.department,
@@ -66,6 +86,8 @@ const ListEmployes = ({ totalEmployes }: ListEmployesProps) => {
       item.agent_id
     )
   })
+
+  useEffect(() => {}, [filteredByName])
 
   return (
     <Container>
