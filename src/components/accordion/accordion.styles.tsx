@@ -71,3 +71,21 @@ export const TextAccordion = styled(textDefault)`
   font-weight: 600;
   text-transform: capitalize;
 `
+
+export const Status = styled.div`
+  width: 72px;
+  height: 24px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${colors.statusColor};
+  font-size: 1.4rem;
+  line-height: 1.624rem;
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif;
+`
+
+export const StatusInactive = styled(Status)`
+  background-color: ${colors.statusColorInactive};
+`

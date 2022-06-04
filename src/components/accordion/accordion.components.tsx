@@ -13,6 +13,8 @@ import {
   Text,
   ButtonAccordion,
   TextAccordion,
+  Status,
+  StatusInactive,
 } from './accordion.styles'
 import InsertDriveFileOutlinedIcon from '@mui/icons-material/InsertDriveFileOutlined'
 
@@ -35,6 +37,19 @@ interface AccordionProps {
 }
 
 const AccordionComponent = ({ row, columns }: AccordionProps) => {
+  const translatorStatus = (value: string) => {
+    const translator = {
+      inactive: <StatusInactive>Inativo</StatusInactive>,
+      active: <Status>Ativo</Status>,
+    }
+
+    if (!value) {
+      return <StatusInactive>Inativo</StatusInactive>
+    }
+
+    return translator[value as keyof typeof translator]
+  }
+
   const translatorColumnsRender = (nameColumn: string) => {
     const translator = {
       name: (
@@ -83,7 +98,7 @@ const AccordionComponent = ({ row, columns }: AccordionProps) => {
       status: (
         <DetailsAccordion style={{ flexDirection: 'column' }}>
           <Title>Status</Title>
-          <Text>{row.status}</Text>
+          <Text>{translatorStatus(String(row.status))}</Text>
         </DetailsAccordion>
       ),
     }

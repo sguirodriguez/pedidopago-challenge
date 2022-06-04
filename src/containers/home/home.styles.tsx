@@ -1,11 +1,28 @@
 import styled from '@emotion/styled'
 import { colors, textDefault } from '../../styles/global'
 import Tab from '@mui/material/Tab'
+import Box from '@mui/material/Box'
+import Select from '@mui/material/Select'
 
 export const Title = styled(textDefault)`
   font-weight: 600;
   font-size: 3.2rem;
   line-height: 32px;
+
+  @media (max-width: 576px) {
+    display: none;
+  }
+`
+
+export const TitleMobile = styled(textDefault)`
+  font-weight: 600;
+  font-size: 2.4rem;
+  line-height: 2.4rem;
+  display: none;
+
+  @media (max-width: 576px) {
+    display: block;
+  }
 `
 
 export const DashboardBox = styled.div`
@@ -27,6 +44,21 @@ export const DashboardBox = styled.div`
     overflow-x: visible;
     overflow-y: visible;
     height: 1300px;
+  }
+`
+export const BoxTable = styled(Box)`
+  width: 100%;
+
+  @media (max-width: 576px) {
+    display: none;
+  }
+`
+export const SelectTab = styled(Select)`
+  width: 100%;
+  display: none;
+
+  @media (max-width: 576px) {
+    display: block;
   }
 `
 

@@ -28,6 +28,8 @@ import {
 import Avatar from '@mui/material/Avatar'
 import AccordionComponent from '../accordion/accordion.components'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import ExpandLessIcon from '@mui/icons-material/ExpandLess'
+import { colors } from '../../styles/global'
 
 type Column = Array<{
   id: 'name' | 'department' | 'responsibility' | 'unity' | 'status' | 'action'
@@ -62,6 +64,7 @@ const DataTable = ({
 }: DataTableProps) => {
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(10)
+  const [count, setCount] = useState(5)
 
   const handleChangeRows = (event: any) => {
     setRowsPerPage(event.target.value)
@@ -103,14 +106,29 @@ const DataTable = ({
   return (
     <Container>
       <ContainerAccordion>
-        {rows?.map((row: any) => (
+        {rows?.slice(0, count).map((row: any) => (
           <AccordionComponent row={row} columns={columns} />
         ))}
 
-        <ButtonShowMore variant="outlined">
-          <ExpandMoreIcon style={{ fontSize: 18 }} />
-          <TextShowMore>Carregar mais</TextShowMore>
-        </ButtonShowMore>
+        {count > rows?.length ? (
+          <ButtonShowMore
+            variant="outlined"
+            style={{ borderColor: colors.borderButtonAccordionColor }}
+            onClick={() => setCount(5)}
+          >
+            <ExpandLessIcon style={{ fontSize: 18 }} />
+            <TextShowMore>Esconder</TextShowMore>
+          </ButtonShowMore>
+        ) : (
+          <ButtonShowMore
+            variant="outlined"
+            style={{ borderColor: colors.borderButtonAccordionColor }}
+            onClick={() => setCount(count + 5)}
+          >
+            <ExpandMoreIcon style={{ fontSize: 18 }} />
+            <TextShowMore>Carregar mais</TextShowMore>
+          </ButtonShowMore>
+        )}
       </ContainerAccordion>
 
       <ContainerPaper variant="outlined" className="paper-container">
