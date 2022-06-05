@@ -16,9 +16,12 @@ import { colors } from '../../styles/global'
 import ListEmployes from '../../components/listEmployes/listEmployes.components'
 import ListResponsabilities from '../../components/listResponsibilities/listResponsibilities.components'
 import ModalComponent from '../../components/modal/modal.components'
+import Skeleton from '@mui/material/Skeleton'
+import Stack from '@mui/material/Stack'
 
 type HomeProps = {
   handlers: {
+    loading: boolean
     totalEmployes: Array<{
       agent_id: number
       branch: string
@@ -37,7 +40,7 @@ type HomeProps = {
 }
 
 const HomeScreen: React.FC<HomeProps> = ({ handlers }) => {
-  const { totalEmployes, totalResponsabilities } = handlers
+  const { totalEmployes, totalResponsabilities, loading } = handlers
   const [tabIndex, setTabIndex] = useState(0)
   const [isModalVisible, setIsModalVisible] = useState(false)
 
@@ -73,50 +76,62 @@ const HomeScreen: React.FC<HomeProps> = ({ handlers }) => {
         gap: 24,
       }}
     >
-      <>
-        <Title>Organização</Title>
-        <TitleMobile>Colaboradores</TitleMobile>
-      </>
+      {loading ? (
+        <Stack spacing={1}>
+          <Skeleton variant="text" width={'90%'} height={60} />
 
-      <DashboardBox>
-        <BoxTable>
-          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-            <Tabs
-              value={tabIndex}
-              onChange={handleChange}
-              TabIndicatorProps={{
-                style: { background: colors.primaryColor },
-              }}
-            >
-              <TabItem
-                label={translatorTabLabel(tabIndex, 'Colaboradores')}
-                {...a11yProps(0)}
+          <Skeleton variant="rectangular" width={'90%'} height={540} />
+        </Stack>
+      ) : (
+        <>
+          <>
+            <Title>Organização</Title>
+            <TitleMobile>Colaboradores</TitleMobile>
+          </>
+
+          <DashboardBox>
+            <BoxTable>
+              <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                <Tabs
+                  value={tabIndex}
+                  onChange={handleChange}
+                  TabIndicatorProps={{
+                    style: { background: colors.primaryColor },
+                  }}
+                >
+                  <TabItem
+                    label={translatorTabLabel(tabIndex, 'Colaboradores')}
+                    {...a11yProps(0)}
+                  />
+                  <TabItem
+                    label={translatorTabLabel(tabIndex == 0 ? 1 : 0, 'Cargos')}
+                    {...a11yProps(1)}
+                  />
+                </Tabs>
+              </Box>
+            </BoxTable>
+
+            <SelectTab onClick={() => setIsModalVisible(true)}>
+              <TabTitle>{tabIndex == 0 ? 'Colaboradores' : 'Cargos'}</TabTitle>
+              <MoreVertIconTable />
+            </SelectTab>
+
+            {tabIndex == 0 ? (
+              <ListEmployes totalEmployes={totalEmployes} />
+            ) : (
+              <ListResponsabilities
+                totalResponsabilities={totalResponsabilities}
               />
-              <TabItem
-                label={translatorTabLabel(tabIndex == 0 ? 1 : 0, 'Cargos')}
-                {...a11yProps(1)}
-              />
-            </Tabs>
-          </Box>
-        </BoxTable>
-
-        <SelectTab onClick={() => setIsModalVisible(true)}>
-          <TabTitle>{tabIndex == 0 ? 'Colaboradores' : 'Cargos'}</TabTitle>
-          <MoreVertIconTable />
-        </SelectTab>
-
-        {tabIndex == 0 ? (
-          <ListEmployes totalEmployes={totalEmployes} />
-        ) : (
-          <ListResponsabilities totalResponsabilities={totalResponsabilities} />
-        )}
-      </DashboardBox>
-      <ModalComponent
-        setIsModalVisible={setIsModalVisible}
-        isModalVisible={isModalVisible}
-        listMode={'CHANGETAB'}
-        handleFunction={handleFunction}
-      />
+            )}
+          </DashboardBox>
+          <ModalComponent
+            setIsModalVisible={setIsModalVisible}
+            isModalVisible={isModalVisible}
+            listMode={'CHANGETAB'}
+            handleFunction={handleFunction}
+          />
+        </>
+      )}
     </Layout>
   )
 }

@@ -18,6 +18,7 @@ const RolesAndPermissionsController: React.FC = () => {
   const [detailsResponsability, setDetailsResponsability] = useState<
     DetailsRole | {}
   >()
+  const [loading, setLoading] = useState(false)
   const router = useRouter()
   const { id } = router.query
 
@@ -26,13 +27,16 @@ const RolesAndPermissionsController: React.FC = () => {
   }, [])
 
   const requestDetailsResponsability = async () => {
+    setLoading(true)
     const response = await getDetailsResponsability()
+    setLoading(false)
     const { role } = response
     setDetailsResponsability(role)
   }
 
   const handlers: any = {
     detailsResponsability,
+    loading,
   }
 
   return <RolesAndPermissionsScreen handlers={handlers} />

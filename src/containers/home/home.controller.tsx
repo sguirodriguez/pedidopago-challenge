@@ -42,9 +42,12 @@ const HomeController: React.FC = () => {
   const [totalEmployes, setTotalEmployes] = useState<TotalsEmployes>()
   const [totalResponsabilities, setTotalResponsabilities] =
     useState<TotalsResponsabilities>()
+  const [loading, setLoading] = useState(false)
 
   const requestTotalsEmployes = async () => {
+    setLoading(true)
     const response = await getTotalsEmployes()
+    setLoading(false)
     const { items } = response
     setTotalEmployes(items)
   }
@@ -63,6 +66,7 @@ const HomeController: React.FC = () => {
   const handlers: Handlers | any = {
     totalEmployes,
     totalResponsabilities,
+    loading,
   }
 
   return <HomeScreen handlers={handlers} />

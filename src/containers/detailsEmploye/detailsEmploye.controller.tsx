@@ -25,6 +25,7 @@ type DetailsEmploye = {
 }
 
 const DetailsEmployeController: React.FC = () => {
+  const [loading, setLoading] = useState(false)
   const [detailsEmploye, setDetailsEmploye] = useState<DetailsEmploye>()
   const router = useRouter()
   const { id } = router.query
@@ -34,13 +35,16 @@ const DetailsEmployeController: React.FC = () => {
   }, [])
 
   const requestDetailsEmploye = async () => {
+    setLoading(true)
     const response = await getDetailsEmploye()
+    setLoading(false)
     const { agent } = response
     setDetailsEmploye(agent)
   }
 
   const handlers: any = {
     detailsEmploye,
+    loading,
   }
 
   return <DetailsEmployeScreen handlers={handlers} />
