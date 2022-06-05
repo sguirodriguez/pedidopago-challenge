@@ -98,7 +98,7 @@ export const Name = styled(textDefault)`
   line-height: 1.4rem;
 `
 export const Description = styled(textDefault)`
-  color: ${colors.background};
+  color: ${colors.textColor};
   font-weight: 400;
   font-size: 1.2rem;
   line-height: 1.44rem;
