@@ -77,9 +77,23 @@ const DetailsEmployeScreen: React.FC<DetailsEmployeScreenProps> = ({
     <>
       <Layout>
         {loading ? (
-          <Stack spacing={1}>
+          <Stack
+            spacing={1}
+            style={{ justifyContent: 'center', alignItems: 'center' }}
+          >
             <Skeleton variant="text" width={'90%'} height={60} />
-            <Skeleton variant="circular" width={80} height={80} />
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                width: '90%',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <Skeleton variant="circular" width={80} height={80} />
+              <Skeleton variant="text" width={'90%'} height={80} />
+            </div>
             <Skeleton variant="rectangular" width={'90%'} height={370} />
           </Stack>
         ) : (

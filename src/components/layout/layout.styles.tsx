@@ -36,6 +36,7 @@ export const Left = styled.div`
     border: 0px;
     flex: 1;
     justify-content: center;
+    margin-right: 50px;
   }
 `
 

@@ -77,7 +77,10 @@ const HomeScreen: React.FC<HomeProps> = ({ handlers }) => {
       }}
     >
       {loading ? (
-        <Stack spacing={1}>
+        <Stack
+          spacing={1}
+          style={{ justifyContent: 'center', alignItems: 'center' }}
+        >
           <Skeleton variant="text" width={'90%'} height={60} />
 
           <Skeleton variant="rectangular" width={'90%'} height={540} />
