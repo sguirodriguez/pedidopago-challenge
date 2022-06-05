@@ -56,7 +56,7 @@ const Popover = ({ index, details, listMode }: PopoverProps) => {
           <>
             <ItemToolTip
               onClick={() => {
-                router.push(`/details/${details}`)
+                router.push(`/roles/`)
               }}
             >
               <RemoveRedEyeOutlinedIcon

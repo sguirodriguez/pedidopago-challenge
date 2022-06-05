@@ -33,6 +33,7 @@ export const colors = {
   borderButtonAccordionColor:'#B5F1DD',
   iconToolTipColor:'#A3B8B0',
   backgroundColumnInfo: '#F5FAF8',
-  dataTitleColor:'#587169'
+  dataTitleColor:'#587169',
+  textTableBodyColor:'#587169'
 }
 

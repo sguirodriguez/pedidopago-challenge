@@ -57,7 +57,7 @@ const ModalComponent = ({
           <ItemToolTip
             onClick={() => {
               setIsModalVisible(false)
-              router.push(`/details/${1}`)
+              router.push(`/roles/`)
             }}
           >
             <RemoveRedEyeOutlinedIcon
@@ -146,7 +146,7 @@ const ModalComponent = ({
           left: '50%',
           transform: 'translate(-50%, -4%)',
           width: 330,
-          height: listMode == 'LISTEMPLOYES' || 'CHANGETAB' ? 180 : 300,
+          height: ['LISTEMPLOYES', 'CHANGETAB'].includes(listMode) ? 180 : 300,
           bgcolor: 'background.paper',
           p: 1,
           borderTopLeftRadius: 10,
