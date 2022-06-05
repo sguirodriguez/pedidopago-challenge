@@ -57,8 +57,16 @@ const DetailsEmployeScreen: React.FC<DetailsEmployeScreenProps> = ({
   handlers,
 }) => {
   const { detailsEmploye } = handlers
-  const router = useRouter()
+  const router = useRouter() // router para pegar id recebido pela tabela
   const { id } = router.query
+
+  const modifyBirthDate = detailsEmploye?.birth_date.split('-')
+  const takeDay = modifyBirthDate ? modifyBirthDate[2]?.split('T') : ''
+  const year = modifyBirthDate ? modifyBirthDate[0] : ''
+  const month = modifyBirthDate ? modifyBirthDate[1] : ''
+  const day = takeDay ? takeDay[0] : ''
+  const date = day + '/' + month + '/' + year
+
   return (
     <>
       <Layout>
@@ -113,7 +121,7 @@ const DetailsEmployeScreen: React.FC<DetailsEmployeScreenProps> = ({
                 <ColumnAvatar>Avatar</ColumnAvatar>
                 <ColumnInfo>
                   <ColumnTitle>Nascimento</ColumnTitle>
-                  <ColumnValue>{detailsEmploye?.birth_date}</ColumnValue>
+                  <ColumnValue>{date}</ColumnValue>
                 </ColumnInfo>
               </Column>
             </ContainerPersonalDetails>
@@ -136,7 +144,9 @@ const DetailsEmployeScreen: React.FC<DetailsEmployeScreenProps> = ({
                   <ExpandMoreIcon style={{ fontSize: 18 }} />
                 </DataItem>
                 <DataItem>
-                  <DataTitle>{detailsEmploye?.status}</DataTitle>
+                  <DataTitle>
+                    {detailsEmploye?.status == 'active' ? 'Ativo' : 'Inativo'}
+                  </DataTitle>
                   <ExpandMoreIcon style={{ fontSize: 18 }} />
                 </DataItem>
               </Data>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import Avatar from '@mui/material/Avatar'
@@ -17,6 +17,7 @@ import {
   StatusInactive,
 } from './accordion.styles'
 import InsertDriveFileOutlinedIcon from '@mui/icons-material/InsertDriveFileOutlined'
+import ModalComponent from '../modal/modal.components'
 
 type column = {
   id:
@@ -50,6 +51,8 @@ const AccordionComponent = ({
   columns,
   listMode = 'LISTEMPLOYES',
 }: AccordionProps) => {
+  const [isModalVisible, setIsModalVisible] = useState(false)
+
   const translatorStatus = (value: string) => {
     const translator = {
       inactive: <StatusInactive>Inativo</StatusInactive>,
@@ -161,13 +164,19 @@ const AccordionComponent = ({
         <ButtonAccordion
           variant="outlined"
           onClick={() => {
-            console.log(row.action ? row.action : 'open modal')
+            setIsModalVisible(true)
           }}
         >
           <InsertDriveFileOutlinedIcon style={{ fontSize: 18 }} />
           <TextAccordion>Ações</TextAccordion>
         </ButtonAccordion>
       </DetailsAccordion>
+
+      <ModalComponent
+        isModalVisible={isModalVisible}
+        setIsModalVisible={setIsModalVisible}
+        listMode={listMode}
+      />
     </Container>
   )
 }
