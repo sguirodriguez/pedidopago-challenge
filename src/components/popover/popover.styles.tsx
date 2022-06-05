@@ -18,22 +18,21 @@ export const ToolTip = styled(Popover)`
   align-items: center;
 `
 
-export const ItemToolTip = styled.a`
+export const ItemToolTip = styled(Button)`
   width: 300px;
   height: 66px;
-  height: 100%;
-  padding: 10px;
   display: flex;
-  align-items: center;
+  flexdirection: row;
+  justify-content: flex-start;
   gap: 10px;
+  padding: 10px;
 `
 export const ItemToolTipLink = styled(Link)`
   width: 300px;
   height: 66px;
-  height: 100%;
-  padding: 10px;
   display: flex;
-  align-items: center;
+  flexdirection: row;
+  justify-content: flex-start;
   gap: 10px;
 `
 

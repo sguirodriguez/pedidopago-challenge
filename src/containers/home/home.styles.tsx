@@ -2,7 +2,8 @@ import styled from '@emotion/styled'
 import { colors, textDefault } from '../../styles/global'
 import Tab from '@mui/material/Tab'
 import Box from '@mui/material/Box'
-import Select from '@mui/material/Select'
+import { Button } from '@mui/material'
+import MoreVertIcon from '@mui/icons-material/MoreVert'
 
 export const Title = styled(textDefault)`
   font-weight: 600;
@@ -53,13 +54,24 @@ export const BoxTable = styled(Box)`
     display: none;
   }
 `
-export const SelectTab = styled(Select)`
+export const SelectTab = styled(Button)`
   width: 100%;
   display: none;
 
   @media (max-width: 576px) {
-    display: block;
+    height: 56px;
+    padding: 20px;
+    border: 2px solid ${colors.tableBorderColor};
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
+`
+export const MoreVertIconTable = styled(MoreVertIcon)`
+  width: 22px;
+  height: 22px;
+  color: ${colors.iconTableColor};
 `
 
 export const TabTitle = styled(textDefault)`

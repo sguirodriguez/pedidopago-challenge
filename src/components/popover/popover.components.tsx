@@ -17,9 +17,12 @@ type PopoverProps = {
   details?: number | string
   listMode?: 'LISTEMPLOYES' | 'LISTRESPONSIBILITIES' | 'DEFAULT'
 }
+import { useRouter } from 'next/router'
 
 const Popover = ({ index, details, listMode }: PopoverProps) => {
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null)
+
+  const router = useRouter()
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget)
@@ -51,17 +54,20 @@ const Popover = ({ index, details, listMode }: PopoverProps) => {
       >
         {listMode == 'LISTRESPONSIBILITIES' ? (
           <>
-            <Link href={`/details/${details}`}>
-              <ItemToolTip onClick={() => {}}>
-                <RemoveRedEyeOutlinedIcon
-                  style={{
-                    color: colors.iconToolTipColor,
-                  }}
-                />
+            <ItemToolTip
+              onClick={() => {
+                router.push(`/details/${details}`)
+              }}
+            >
+              <RemoveRedEyeOutlinedIcon
+                style={{
+                  color: colors.iconToolTipColor,
+                }}
+              />
 
-                <TitleToolTipe>Ver Cargo</TitleToolTipe>
-              </ItemToolTip>
-            </Link>
+              <TitleToolTipe>Ver Cargo</TitleToolTipe>
+            </ItemToolTip>
+
             <ItemToolTip>
               <EditRoundedIcon
                 style={{

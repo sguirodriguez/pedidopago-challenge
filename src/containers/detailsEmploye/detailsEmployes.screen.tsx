@@ -1,5 +1,5 @@
-import { useRouter } from 'next/router'
 import React from 'react'
+import { useRouter } from 'next/router'
 import Layout from '../../components/layout/layout.components'
 import {
   Title,
@@ -22,11 +22,15 @@ import {
   Data,
   DataItem,
   DataTitle,
+  GoBack,
 } from './detailsEmployes.styles'
-import Link from 'next/link'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import Avatar from '@mui/material/Avatar'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import { colors } from '../../styles/global'
+import ArticleIcon from '@mui/icons-material/Article'
+import PhoneIcon from '@mui/icons-material/Phone'
+import DateRangeIcon from '@mui/icons-material/DateRange'
 
 type DetailsEmployeScreenProps = {
   handlers: {
@@ -57,9 +61,8 @@ const DetailsEmployeScreen: React.FC<DetailsEmployeScreenProps> = ({
   handlers,
 }) => {
   const { detailsEmploye } = handlers
-  const router = useRouter() // router para pegar id recebido pela tabela
+  const router = useRouter() // router para pegar id recebido pela tabela e tambem redirecionar
   const { id } = router.query
-
   const modifyBirthDate = detailsEmploye?.birth_date.split('-')
   const takeDay = modifyBirthDate ? modifyBirthDate[2]?.split('T') : ''
   const year = modifyBirthDate ? modifyBirthDate[0] : ''
@@ -71,14 +74,14 @@ const DetailsEmployeScreen: React.FC<DetailsEmployeScreenProps> = ({
     <>
       <Layout>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
-          <Link href={`/`}>
+          <GoBack onClick={() => router.push('/')}>
             <ContainerGoBack>
               <ContainerIcon>
-                <ArrowBackIcon style={{ fontSize: 20 }} />
+                <ArrowBackIcon style={{ fontSize: 20, color: colors.black }} />
               </ContainerIcon>
               <Title>Detalhes do colaborador</Title>
             </ContainerGoBack>
-          </Link>
+          </GoBack>
 
           <DashboardBox>
             <ContainerAvatarAndName>
@@ -98,14 +101,18 @@ const DetailsEmployeScreen: React.FC<DetailsEmployeScreenProps> = ({
 
             <ContainerPersonalDetails>
               <Column>
-                <ColumnAvatar>Avatar</ColumnAvatar>
+                <ColumnAvatar>
+                  <ArticleIcon />
+                </ColumnAvatar>
                 <ColumnInfo>
                   <ColumnTitle>{detailsEmploye?.document.type}</ColumnTitle>
                   <ColumnValue>{detailsEmploye?.document.number}</ColumnValue>
                 </ColumnInfo>
               </Column>
               <Column>
-                <ColumnAvatar>Avatar</ColumnAvatar>
+                <ColumnAvatar>
+                  <PhoneIcon />
+                </ColumnAvatar>
                 <ColumnInfo>
                   <ColumnTitle>Telefone</ColumnTitle>
                   <ColumnValue>
@@ -118,7 +125,9 @@ const DetailsEmployeScreen: React.FC<DetailsEmployeScreenProps> = ({
                 </ColumnInfo>
               </Column>
               <Column>
-                <ColumnAvatar>Avatar</ColumnAvatar>
+                <ColumnAvatar>
+                  <DateRangeIcon />
+                </ColumnAvatar>
                 <ColumnInfo>
                   <ColumnTitle>Nascimento</ColumnTitle>
                   <ColumnValue>{date}</ColumnValue>

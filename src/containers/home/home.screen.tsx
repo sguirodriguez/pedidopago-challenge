@@ -6,6 +6,7 @@ import {
   TabItem,
   TitleMobile,
   SelectTab,
+  MoreVertIconTable,
 } from './home.styles'
 import Layout from '../../components/layout/layout.components'
 import React, { useState } from 'react'
@@ -14,7 +15,7 @@ import Box from '@mui/material/Box'
 import { colors } from '../../styles/global'
 import ListEmployes from '../../components/listEmployes/listEmployes.components'
 import ListResponsabilities from '../../components/listResponsibilities/listResponsibilities.components'
-import MenuItem from '@mui/material/MenuItem'
+import ModalComponent from '../../components/modal/modal.components'
 
 type HomeProps = {
   handlers: {
@@ -38,9 +39,14 @@ type HomeProps = {
 const HomeScreen: React.FC<HomeProps> = ({ handlers }) => {
   const { totalEmployes, totalResponsabilities } = handlers
   const [tabIndex, setTabIndex] = useState(0)
+  const [isModalVisible, setIsModalVisible] = useState(false)
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setTabIndex(newValue)
+  }
+
+  const handleFunction = (value: number) => {
+    setTabIndex(value)
   }
 
   function a11yProps(index: number) {
@@ -94,14 +100,9 @@ const HomeScreen: React.FC<HomeProps> = ({ handlers }) => {
           </Box>
         </BoxTable>
 
-        <SelectTab
-          value={String(tabIndex)}
-          onChange={(event: any) => setTabIndex(Number(event.target.value))}
-          SelectDisplayProps={{ className: 'box-items' }}
-          autoWidth
-        >
-          <MenuItem value={0}>Colaboradores</MenuItem>
-          <MenuItem value={1}>Cargos</MenuItem>
+        <SelectTab onClick={() => setIsModalVisible(true)}>
+          <TabTitle>{tabIndex == 0 ? 'Colaboradores' : 'Cargos'}</TabTitle>
+          <MoreVertIconTable />
         </SelectTab>
 
         {tabIndex == 0 ? (
@@ -110,6 +111,12 @@ const HomeScreen: React.FC<HomeProps> = ({ handlers }) => {
           <ListResponsabilities totalResponsabilities={totalResponsabilities} />
         )}
       </DashboardBox>
+      <ModalComponent
+        setIsModalVisible={setIsModalVisible}
+        isModalVisible={isModalVisible}
+        listMode={'CHANGETAB'}
+        handleFunction={handleFunction}
+      />
     </Layout>
   )
 }

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { textDefault, colors } from '../../styles/global'
 import Layout from '../../components/layout/layout.components'
-import { css } from '@emotion/react'
+import Button from '@mui/material/Button'
 
 export const LayoutModified = styled(Layout)`
   display: flex;
@@ -9,10 +9,17 @@ export const LayoutModified = styled(Layout)`
   gap: 28px;
 `
 
+export const GoBack = styled(Button)`
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+`
+
 export const Title = styled(textDefault)`
   font-weight: 600;
   font-size: 3.2rem;
   line-height: 32px;
+  text-transform: capitalize;
 
   @media (max-width: 576px) {
     font-size: 2rem;

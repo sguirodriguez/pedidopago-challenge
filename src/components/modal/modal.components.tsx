@@ -7,39 +7,40 @@ import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined
 import EditRoundedIcon from '@mui/icons-material/EditRounded'
 import ContentCopyOutlinedIcon from '@mui/icons-material/ContentCopyOutlined'
 import { colors } from '../../styles/global'
-import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 type ModalComponentProps = {
   isModalVisible: boolean
   setIsModalVisible: any
-  listMode?: 'LISTEMPLOYES' | 'LISTRESPONSIBILITIES' | 'DEFAULT'
+  listMode?: 'LISTEMPLOYES' | 'LISTRESPONSIBILITIES' | 'DEFAULT' | 'CHANGETAB'
+  handleFunction?: any
 }
 
 const ModalComponent = ({
   isModalVisible,
   setIsModalVisible,
   listMode = 'DEFAULT',
+  handleFunction,
 }: ModalComponentProps) => {
+  const router = useRouter()
   const translatorColumnsForEmployes = (translatorListMode: string) => {
     const translator = {
       LISTEMPLOYES: (
         <>
-          <Link href={`/details/${1}`} onClick={() => setIsModalVisible(false)}>
-            <>
-              <ItemToolTip
-                onClick={() => {
-                  setIsModalVisible(false)
-                }}
-              >
-                <RemoveRedEyeOutlinedIcon
-                  style={{
-                    color: colors.iconToolTipColor,
-                  }}
-                />
-                <TitleToolTipe>Ver Colaborador</TitleToolTipe>
-              </ItemToolTip>
-            </>
-          </Link>
+          <ItemToolTip
+            onClick={() => {
+              setIsModalVisible(false)
+              router.push(`/details/${1}`)
+            }}
+          >
+            <RemoveRedEyeOutlinedIcon
+              style={{
+                color: colors.iconToolTipColor,
+              }}
+            />
+            <TitleToolTipe>Ver Colaborador</TitleToolTipe>
+          </ItemToolTip>
+
           <ItemToolTip>
             <EditRoundedIcon
               style={{
@@ -53,22 +54,19 @@ const ModalComponent = ({
       ),
       LISTRESPONSIBILITIES: (
         <>
-          <Link href={`/details/${1}`}>
-            <>
-              <ItemToolTip
-                onClick={() => {
-                  setIsModalVisible(false)
-                }}
-              >
-                <RemoveRedEyeOutlinedIcon
-                  style={{
-                    color: colors.iconToolTipColor,
-                  }}
-                />
-                <TitleToolTipe>Ver Cargo</TitleToolTipe>
-              </ItemToolTip>
-            </>
-          </Link>
+          <ItemToolTip
+            onClick={() => {
+              setIsModalVisible(false)
+              router.push(`/details/${1}`)
+            }}
+          >
+            <RemoveRedEyeOutlinedIcon
+              style={{
+                color: colors.iconToolTipColor,
+              }}
+            />
+            <TitleToolTipe>Ver Cargo</TitleToolTipe>
+          </ItemToolTip>
           <ItemToolTip>
             <EditRoundedIcon
               style={{
@@ -98,6 +96,37 @@ const ModalComponent = ({
           </ItemToolTip>
         </>
       ),
+      CHANGETAB: (
+        <>
+          <ItemToolTip
+            onClick={() => {
+              setIsModalVisible(false)
+              handleFunction(0)
+            }}
+          >
+            <RemoveRedEyeOutlinedIcon
+              style={{
+                color: colors.iconToolTipColor,
+              }}
+            />
+            <TitleToolTipe>Colaboradores</TitleToolTipe>
+          </ItemToolTip>
+
+          <ItemToolTip
+            onClick={() => {
+              setIsModalVisible(false)
+              handleFunction(1)
+            }}
+          >
+            <EditRoundedIcon
+              style={{
+                color: colors.iconToolTipColor,
+              }}
+            />
+            <TitleToolTipe>Cargos</TitleToolTipe>
+          </ItemToolTip>
+        </>
+      ),
       DEFAULT: <></>,
     }
     return translator[translatorListMode as keyof typeof translator]
@@ -117,7 +146,7 @@ const ModalComponent = ({
           left: '50%',
           transform: 'translate(-50%, -4%)',
           width: 330,
-          height: listMode == 'LISTEMPLOYES' ? 180 : 300,
+          height: listMode == 'LISTEMPLOYES' || 'CHANGETAB' ? 180 : 300,
           bgcolor: 'background.paper',
           p: 1,
           borderTopLeftRadius: 10,
