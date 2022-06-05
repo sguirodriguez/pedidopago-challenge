@@ -104,11 +104,6 @@ const ModalComponent = ({
               handleFunction(0)
             }}
           >
-            <RemoveRedEyeOutlinedIcon
-              style={{
-                color: colors.iconToolTipColor,
-              }}
-            />
             <TitleToolTipe>Colaboradores</TitleToolTipe>
           </ItemToolTip>
 
@@ -118,11 +113,6 @@ const ModalComponent = ({
               handleFunction(1)
             }}
           >
-            <EditRoundedIcon
-              style={{
-                color: colors.iconToolTipColor,
-              }}
-            />
             <TitleToolTipe>Cargos</TitleToolTipe>
           </ItemToolTip>
         </>
