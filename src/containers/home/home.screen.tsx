@@ -67,8 +67,11 @@ const HomeScreen: React.FC<HomeProps> = ({ handlers }) => {
         gap: 24,
       }}
     >
-      <Title>Organização</Title>
-      <TitleMobile>Colaboradores</TitleMobile>
+      <>
+        <Title>Organização</Title>
+        <TitleMobile>Colaboradores</TitleMobile>
+      </>
+
       <DashboardBox>
         <BoxTable>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>

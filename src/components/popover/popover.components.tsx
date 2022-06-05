@@ -11,7 +11,7 @@ import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined
 import EditRoundedIcon from '@mui/icons-material/EditRounded'
 import ContentCopyOutlinedIcon from '@mui/icons-material/ContentCopyOutlined'
 import { colors } from '../../styles/global'
-
+import Link from 'next/link'
 type PopoverProps = {
   index: any
   details?: number | string
@@ -51,19 +51,17 @@ const Popover = ({ index, details, listMode }: PopoverProps) => {
       >
         {listMode == 'LISTRESPONSIBILITIES' ? (
           <>
-            <ItemToolTip
-              onClick={() => {
-                console.log('cargo', details)
-              }}
-            >
-              <RemoveRedEyeOutlinedIcon
-                style={{
-                  color: colors.iconToolTipColor,
-                }}
-              />
+            <Link href={`/details/${details}`}>
+              <ItemToolTip onClick={() => {}}>
+                <RemoveRedEyeOutlinedIcon
+                  style={{
+                    color: colors.iconToolTipColor,
+                  }}
+                />
 
-              <TitleToolTipe>Ver Cargo</TitleToolTipe>
-            </ItemToolTip>
+                <TitleToolTipe>Ver Cargo</TitleToolTipe>
+              </ItemToolTip>
+            </Link>
             <ItemToolTip>
               <EditRoundedIcon
                 style={{
@@ -94,19 +92,17 @@ const Popover = ({ index, details, listMode }: PopoverProps) => {
           </>
         ) : (
           <>
-            <ItemToolTip
-              onClick={() => {
-                console.log('agente', details)
-              }}
-            >
-              <RemoveRedEyeOutlinedIcon
-                style={{
-                  color: colors.iconToolTipColor,
-                }}
-              />
+            <Link href={`/details/${details}`}>
+              <ItemToolTip>
+                <RemoveRedEyeOutlinedIcon
+                  style={{
+                    color: colors.iconToolTipColor,
+                  }}
+                />
 
-              <TitleToolTipe>Ver Colaborador</TitleToolTipe>
-            </ItemToolTip>
+                <TitleToolTipe>Ver Colaborador</TitleToolTipe>
+              </ItemToolTip>
+            </Link>
             <ItemToolTip>
               <DeleteOutlineOutlinedIcon
                 style={{
