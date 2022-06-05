@@ -6,7 +6,7 @@ import {
   TitleTable,
   MarginHorizontal,
 } from './listEmployes.styles'
-import DataTable from '../datatable/dataTable.components'
+import DataTable from '../itemsInTable/itemsInTable.components'
 
 type Column = Array<{
   id: 'name' | 'department' | 'responsibility' | 'unity' | 'status' | 'action'

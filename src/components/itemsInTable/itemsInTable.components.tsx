@@ -23,14 +23,48 @@ import {
   ContainerAccordion,
   ButtonShowMore,
   TextShowMore,
-} from './dataTable.styles'
+} from './itemsInTable.styles'
 import Avatar from '@mui/material/Avatar'
 import AccordionComponent from '../accordion/accordion.components'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import ExpandLessIcon from '@mui/icons-material/ExpandLess'
 import { colors } from '../../styles/global'
-import { DataTableProps } from './types'
 import Popover from '../popover/popover.components'
+
+type Column =
+  | Array<{
+      id:
+        | 'name'
+        | 'department'
+        | 'responsibility'
+        | 'unity'
+        | 'status'
+        | 'action'
+        | 'agents_quantity'
+      label: string
+      minWidth: number
+      align: 'right' | 'left' | 'center'
+    }>
+  | []
+
+interface Rows {
+  name?: Array<[string, string]> | string
+  department?: number | string
+  responsibility?: number | string
+  unity?: number | string
+  status?: number | string
+  action?: any
+  agents_quantity?: number
+}
+
+interface DataTableProps {
+  columns: Column
+  rows: Rows[]
+  avatar?: true | false
+  rowsPerPageVisible?: true | false
+  paginationVisible?: true | false
+  listMode: 'LISTEMPLOYES' | 'LISTRESPONSIBILITIES' | 'DEFAULT'
+}
 
 const DataTable = ({
   columns,
