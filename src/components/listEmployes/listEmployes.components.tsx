@@ -6,7 +6,7 @@ import {
   TitleTable,
   MarginHorizontal,
 } from './listEmployes.styles'
-import DataTable from '../itemsInTable/itemsInTable.components'
+import ItemsInTable from '../itemsInTable/itemsInTable.components'
 
 type Column = Array<{
   id: 'name' | 'department' | 'responsibility' | 'unity' | 'status' | 'action'
@@ -97,7 +97,12 @@ const ListEmployes = ({ totalEmployes }: ListEmployesProps) => {
       <TitleTable>Listagem de colaboradores</TitleTable>
       <MarginHorizontal />
 
-      <DataTable rows={rows} columns={columns} listMode="LISTEMPLOYES" avatar />
+      <ItemsInTable
+        rows={rows}
+        columns={columns}
+        listMode="LISTEMPLOYES"
+        avatar
+      />
     </Container>
   )
 }

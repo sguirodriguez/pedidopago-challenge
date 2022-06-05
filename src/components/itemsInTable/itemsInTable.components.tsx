@@ -66,7 +66,7 @@ interface DataTableProps {
   listMode: 'LISTEMPLOYES' | 'LISTRESPONSIBILITIES' | 'DEFAULT'
 }
 
-const DataTable = ({
+const ItemsInTable = ({
   columns,
   rows,
   avatar = false,
@@ -244,4 +244,4 @@ const DataTable = ({
   )
 }
 
-export default DataTable
+export default ItemsInTable

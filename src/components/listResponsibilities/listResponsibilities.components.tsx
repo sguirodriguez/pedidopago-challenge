@@ -6,7 +6,7 @@ import {
   TitleTable,
   MarginHorizontal,
 } from './listResponsibilities.styles'
-import DataTable from '../itemsInTable/itemsInTable.components'
+import ItemsInTable from '../itemsInTable/itemsInTable.components'
 
 type Column = Array<{
   id:
@@ -95,7 +95,7 @@ const ListResponsabilities = ({ totalResponsabilities }: ListEmployesProps) => {
       <TitleTable>Listagem de cargos</TitleTable>
       <MarginHorizontal />
 
-      <DataTable
+      <ItemsInTable
         rows={rows}
         columns={columns}
         listMode="LISTRESPONSIBILITIES"
