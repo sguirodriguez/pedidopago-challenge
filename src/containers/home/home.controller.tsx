@@ -4,6 +4,8 @@ import {
   getTotalsEmployes,
   getTotalsResponsabilities,
 } from '../../pages/api/requests'
+import { TabTitle } from './home.styles'
+import { colors } from '../../styles/global'
 
 type TotalsEmployes = Array<{
   agent_id: number
@@ -43,6 +45,8 @@ const HomeController: React.FC = () => {
   const [totalResponsabilities, setTotalResponsabilities] =
     useState<TotalsResponsabilities>()
   const [loading, setLoading] = useState(false)
+  const [tabIndex, setTabIndex] = useState(0)
+  const [isModalVisible, setIsModalVisible] = useState(false)
 
   const requestTotalsEmployes = async () => {
     setLoading(true)
@@ -58,6 +62,23 @@ const HomeController: React.FC = () => {
     setTotalResponsabilities(roles)
   }
 
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setTabIndex(newValue)
+  }
+
+  const handleFunction = (value: number) => {
+    setTabIndex(value)
+  }
+
+  const translatorTabLabel = (index: number, text: string) => {
+    const translatorTab = {
+      0: <TabTitle>{text}</TabTitle>,
+      1: <TabTitle style={{ color: colors.gray }}>{text}</TabTitle>,
+    }
+
+    return translatorTab[index as keyof typeof translatorTab]
+  }
+
   useEffect(() => {
     requestTotalsEmployes()
     requestTotalsResponsabilities()
@@ -67,6 +88,13 @@ const HomeController: React.FC = () => {
     totalEmployes,
     totalResponsabilities,
     loading,
+    tabIndex,
+    setTabIndex,
+    isModalVisible,
+    setIsModalVisible,
+    handleChange,
+    handleFunction,
+    translatorTabLabel,
   }
 
   return <HomeScreen handlers={handlers} />

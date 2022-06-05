@@ -44,62 +44,15 @@ type DetailsRolesScreenProps = {
         permissions: Array<[string]>
       }>
     }
+    rows: any
   }
 }
 
 const RolesAndPermissionsScreen: React.FC<DetailsRolesScreenProps> = ({
   handlers,
 }) => {
-  const { detailsResponsability, loading } = handlers
+  const { detailsResponsability, loading, rows } = handlers
   const router = useRouter() // router para pegar id recebido pela tabela e tambem redirecionar
-
-  const newArrayForRows = detailsResponsability?.grouprules?.map(
-    (item: any) => {
-      let newMap: any = []
-
-      const mapping = item?.permissions?.map((mapingNewValue: any) => {
-        newMap.push(mapingNewValue)
-      })
-      let read = ''
-      let write = ''
-      let deleted = ''
-      const newFilter = newMap?.filter((value: any, index: any) => {
-        if (value == 'read') {
-          read = value
-          return
-        }
-        if (value == 'write') {
-          write = value
-          return
-        }
-        if (value == 'delete') {
-          deleted = value
-          return
-        }
-      })
-
-      const newArray = {
-        role: item.role,
-        read,
-        write,
-        deleted,
-      }
-      return newArray
-    }
-  )
-
-  function createData(
-    name: string,
-    calories: number,
-    fat: number,
-    carbs: number
-  ) {
-    return { name, calories, fat, carbs }
-  }
-
-  const rows = newArrayForRows?.map((item: any) =>
-    createData(item?.role, item.read, item.write, item.deleted)
-  )
 
   return (
     <>
@@ -173,7 +126,7 @@ const RolesAndPermissionsScreen: React.FC<DetailsRolesScreenProps> = ({
                         </TableRow>
                       </TableHeader>
                       <TableBody>
-                        {rows?.map(row => (
+                        {rows?.map((row: any) => (
                           <TableRow className="table-container" key={row.name}>
                             <TableHeaderItem align="left">
                               <TextTableBody>{row?.name}</TextTableBody>

@@ -30,6 +30,13 @@ const DetailsEmployeController: React.FC = () => {
   const router = useRouter()
   const { id } = router.query
 
+  const modifyBirthDate = detailsEmploye?.birth_date.split('-')
+  const takeDay = modifyBirthDate ? modifyBirthDate[2]?.split('T') : ''
+  const year = modifyBirthDate ? modifyBirthDate[0] : ''
+  const month = modifyBirthDate ? modifyBirthDate[1] : ''
+  const day = takeDay ? takeDay[0] : ''
+  const date = day + '/' + month + '/' + year
+
   useEffect(() => {
     requestDetailsEmploye()
   }, [])
@@ -45,6 +52,7 @@ const DetailsEmployeController: React.FC = () => {
   const handlers: any = {
     detailsEmploye,
     loading,
+    date,
   }
 
   return <DetailsEmployeScreen handlers={handlers} />

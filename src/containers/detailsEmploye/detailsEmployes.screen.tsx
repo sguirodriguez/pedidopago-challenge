@@ -57,21 +57,15 @@ type DetailsEmployeScreenProps = {
         number: string
       }
     }
+    date: string
   }
 }
 
 const DetailsEmployeScreen: React.FC<DetailsEmployeScreenProps> = ({
   handlers,
 }) => {
-  const { detailsEmploye, loading } = handlers
+  const { detailsEmploye, loading, date } = handlers
   const router = useRouter() // router para pegar id recebido pela tabela e tambem redirecionar
-  const { id } = router.query
-  const modifyBirthDate = detailsEmploye?.birth_date.split('-')
-  const takeDay = modifyBirthDate ? modifyBirthDate[2]?.split('T') : ''
-  const year = modifyBirthDate ? modifyBirthDate[0] : ''
-  const month = modifyBirthDate ? modifyBirthDate[1] : ''
-  const day = takeDay ? takeDay[0] : ''
-  const date = day + '/' + month + '/' + year
 
   return (
     <>

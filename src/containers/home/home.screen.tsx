@@ -1,3 +1,4 @@
+import React from 'react'
 import {
   Title,
   DashboardBox,
@@ -9,7 +10,6 @@ import {
   MoreVertIconTable,
 } from './home.styles'
 import Layout from '../../components/layout/layout.components'
-import React, { useState } from 'react'
 import Tabs from '@mui/material/Tabs'
 import Box from '@mui/material/Box'
 import { colors } from '../../styles/global'
@@ -36,36 +36,33 @@ type HomeProps = {
       departament: string
       name: string
     }>
+    tabIndex: number
+    isModalVisible: boolean
+    setIsModalVisible: (prev: boolean) => boolean
+    handleChange: (event: React.SyntheticEvent, newValue: number) => void
+    handleFunction: (value: number) => void
+    translatorTabLabel: (index: number, text: string) => any
   }
 }
 
 const HomeScreen: React.FC<HomeProps> = ({ handlers }) => {
-  const { totalEmployes, totalResponsabilities, loading } = handlers
-  const [tabIndex, setTabIndex] = useState(0)
-  const [isModalVisible, setIsModalVisible] = useState(false)
-
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setTabIndex(newValue)
-  }
-
-  const handleFunction = (value: number) => {
-    setTabIndex(value)
-  }
+  const {
+    totalEmployes,
+    totalResponsabilities,
+    loading,
+    tabIndex,
+    isModalVisible,
+    setIsModalVisible,
+    handleChange,
+    handleFunction,
+    translatorTabLabel,
+  } = handlers
 
   function a11yProps(index: number) {
     return {
       id: `simple-tab-${index}`,
       'aria-controls': `simple-tabpanel-${index}`,
     }
-  }
-
-  const translatorTabLabel = (index: number, text: string) => {
-    const translatorTab = {
-      0: <TabTitle>{text}</TabTitle>,
-      1: <TabTitle style={{ color: colors.gray }}>{text}</TabTitle>,
-    }
-
-    return translatorTab[index as keyof typeof translatorTab]
   }
 
   return (
